@@ -6,8 +6,8 @@ const Navbar = () => {
   return (
     <div className="h-[100px] border-b-[5px] border-primary">
       <div className="max-w-[1400px] mx-auto flex  items-center h-full">
-        <div className="flex gap-5">
-          <button className="size-12 bg-primary text-white rounded-lg p-2">
+        <div className="flex gap-5 items-center">
+          <button className="size-10 bg-primary text-white rounded-lg p-2">
             <CgMenuLeft className="size-full" />
           </button>
           <h2 className="flex items-center gap-2 text-secondary text-5xl font-bold">

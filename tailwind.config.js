@@ -16,6 +16,9 @@ module.exports = {
         primary: "#007F73",
         secondary: "#E72929",
       },
+      fontFamily: {
+        sans: ["Mulish", "sans-serif"], // Add this line
+      },
     },
   },
   plugins: [],
