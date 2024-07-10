@@ -7,6 +7,7 @@ const mulish = Mulish({
 });
 
 import Navbar from "@/components/Navbar/Navbar";
+import AuthProvider from "@/services/AuthProvider";
 
 export const metadata = {
   title: "HealCart",
@@ -17,8 +18,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={mulish.className}>
-        <Navbar />
-        {children}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
