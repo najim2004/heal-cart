@@ -1,9 +1,11 @@
 "use client";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEye, FiEyeOff } from "react-icons/fi"; // For password visibility icon
 import { SlClose } from "react-icons/sl";
 import { FcGoogle } from "react-icons/fc";
+import toast from "react-hot-toast";
 const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
   const {
     register,
@@ -13,12 +15,27 @@ const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
   } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   useEffect(() => {
     if (!isOpenLogin) reset();
   }, [isOpenLogin, reset]);
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
+      console.log(res);
+      if (res.ok) {
+        setIsOpenLogin(false);
+        setIsOpenSignUp(false);
+        toast.success("Login successful!");
+      }
+    } catch (error) {
+      toast.error("Failed to login. Please try again.");
+      console.log(error);
+    }
+  };
   return (
     <div className="w-[380px] overflow-x-hidden mx-auto p-6 bg-white rounded-lg shadow-md">
       <button

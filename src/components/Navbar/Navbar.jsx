@@ -6,9 +6,12 @@ import { LiaShoppingCartSolid } from "react-icons/lia";
 import SignUpForm from "../ui/SignUpForm";
 import { useState } from "react";
 import LoginForm from "../ui/LoginForm";
+import { useSession } from "next-auth/react";
 const Navbar = () => {
+  const session = useSession();
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
+  console.log(session);
   return (
     <div className="sticky top-0 left-0 h-[100px] border-b-[5px] border-primary">
       <div className="max-w-[1400px] mx-auto flex  items-center h-full relative">
