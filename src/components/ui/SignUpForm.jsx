@@ -7,13 +7,14 @@ import { FiEye, FiEyeOff } from "react-icons/fi"; // For password visibility ico
 import { SlClose } from "react-icons/sl";
 const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
   const axiosPublic = useAxiosPublic();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     if (!isOpenSignUp) reset();
@@ -27,9 +28,11 @@ const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
         setIsOpenSignUp(false);
         toast.success("Successfully Registered!");
       }
+      setLoading(false);
     } catch (err) {
       toast.error("Failed to register. Please try again.");
       console.log(err);
+      setLoading(false);
     }
   };
   return (
@@ -97,7 +100,11 @@ const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
           type="submit"
           className="w-full bg-primary text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-transparent active:scale-95"
         >
-          Continue
+          {loading ? (
+            <span className="loading loading-dots loading-sm"></span>
+          ) : (
+            "Continue"
+          )}
         </button>
       </form>
       <p className="mt-6 text-center">

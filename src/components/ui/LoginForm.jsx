@@ -14,12 +14,14 @@ const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
     reset,
   } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!isOpenLogin) reset();
   }, [isOpenLogin, reset]);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const res = await signIn("credentials", {
         ...data,
@@ -31,9 +33,14 @@ const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
         setIsOpenSignUp(false);
         toast.success("Login successful!");
       }
+      if (res.error === "CredentialsSignin" || !res.ok) {
+        toast.error("Invalid credentials. Please try again.");
+      }
+      setLoading(false);
     } catch (error) {
       toast.error("Failed to login. Please try again.");
       console.log(error);
+      setLoading(false);
     }
   };
   return (
@@ -85,10 +92,17 @@ const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
           )}
         </div>
         <button
+          disabled={loading}
           type="submit"
-          className="w-full bg-primary text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-transparent active:scale-95 mb-4"
+          className={`w-full bg-primary text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-transparent mb-4 flex items-center justify-center ${
+            loading ? "cursor-not-allowed" : "active:scale-95"
+          }`}
         >
-          Login
+          {loading ? (
+            <span className="loading loading-dots loading-sm"></span>
+          ) : (
+            "Login"
+          )}
         </button>
         <div className="flex items-center justify-center">
           <button
