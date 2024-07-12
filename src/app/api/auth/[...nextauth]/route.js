@@ -35,14 +35,11 @@ const handler = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async signIn(user) {
-      return user;
-    },
-  },
+  callbacks: {},
   pages: {
     signIn: "/auth/signin",
   },
+  debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };
