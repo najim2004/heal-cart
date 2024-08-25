@@ -45,7 +45,7 @@ const Sidebar = () => {
     <div
       className={`${
         toggleSidebar ? "translate-x-0" : "-translate-x-full"
-      } duration-500 fixed top-[100px] left-0 w-[380px] h-[calc(100vh-100px)] border-r-[3px] border-black pl-5 py-5 pr-1`}
+      } duration-500 fixed top-[100px] left-0 w-[380px] h-[calc(100vh-100px)] border-r-[3px] border-black pl-5 py-5 pr-1 bg-white`}
     >
       <button className="flex gap-3 items-center text-xl font-medium">
         <Image src={favoriteIcon} alt="" width={30} height={40} /> Favourites

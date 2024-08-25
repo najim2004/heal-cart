@@ -23,12 +23,9 @@ const Navbar = () => {
   const authenticated = session.status === "authenticated";
   const avatar = null;
   return (
-    <div className="sticky top-0 left-0 h-[100px] border-b-[5px] border-primary">
-      <div className="max-w-[1400px] mx-auto flex  items-center h-full relative">
+    <div className="bg-white sticky top-0 left-0 h-[100px] border-b-[5px] border-primary">
+      <div className="max-w-[1200px] mx-auto flex  items-center h-full relative">
         <div className="flex gap-5 items-center">
-          {/* <button className="">
-            <CgMenuLeft className="size-full" />
-          </button> */}
           <label className="swap swap-rotate size-10 bg-primary text-white rounded-lg p-2">
             {/* this hidden checkbox controls the state */}
             <input onClick={() => dispatch(toggleSidebar())} type="checkbox" />
@@ -65,7 +62,7 @@ const Navbar = () => {
             <input
               type="text"
               name=""
-              className="bg-transparent h-full lg:w-[500px] outline-none px-5"
+              className="bg-transparent h-full lg:w-[400px] outline-none px-5"
               placeholder="Search Your medicine / ঔষধ ও পণ্য সার্চ করুন"
             />
             <button className="bg-primary group text-white/90 w-[50px] flex justify-center items-center text-3xl">

@@ -1,7 +1,14 @@
 "use client";
+import Container from "@/components/ui/Container";
+import HeroSection from "./home/herosection/HeroSection";
+import Categories from "./home/categories/categories";
+
 const Home = () => {
   return (
-    <div className="flex flex-col justify-center items-center space-y-2"></div>
+    <Container className="">
+      <HeroSection />
+      <Categories />
+    </Container>
   );
 };
 

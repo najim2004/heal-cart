@@ -1,7 +1,7 @@
-import { Mulish } from "@next/font/google";
+import { Poppins } from "@next/font/google";
 import "./globals.css";
 
-const mulish = Mulish({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
@@ -19,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={mulish.className}>
+      <body className={poppins.className}>
         <AuthProvider>
           <StoreProvider>
             <Navbar />
