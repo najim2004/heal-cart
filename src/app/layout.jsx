@@ -9,7 +9,7 @@ const mulish = Mulish({
 import Navbar from "@/components/Navbar/Navbar";
 import AuthProvider from "@/services/AuthProvider";
 import StoreProvider from "@/allproviders/StoreProvider";
-import SidebarProvider from "@/allproviders/SidebarProvider";
+import SidebarProvider from "@/allproviders/sidebarProvider";
 import { Toaster } from "react-hot-toast";
 export const metadata = {
   title: "HealCart",
