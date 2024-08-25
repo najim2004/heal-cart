@@ -10,7 +10,10 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { FaRegUser } from "react-icons/fa6";
 import AvatarMenu from "../ui/AvatarMenu";
+import { useDispatch } from "react-redux";
+import { toggleSidebar } from "@/lib/store/slices/sidebarSlice";
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenAvatarMenu, setIsOpenAvatarMenu] = useState(false);
@@ -28,7 +31,7 @@ const Navbar = () => {
           </button> */}
           <label className="swap swap-rotate size-10 bg-primary text-white rounded-lg p-2">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" />
+            <input onClick={() => dispatch(toggleSidebar())} type="checkbox" />
 
             {/* hamburger icon */}
             <svg

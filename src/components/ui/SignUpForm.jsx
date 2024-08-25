@@ -98,8 +98,11 @@ const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
           )}
         </div>
         <button
+          disabled={loading}
           type="submit"
-          className="w-full bg-primary text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-transparent active:scale-95"
+          className={`w-full bg-primary text-white p-3 rounded focus:outline-none focus:ring-2 focus:ring-transparent mb-4 flex items-center justify-center ${
+            loading ? "cursor-not-allowed" : "active:scale-95"
+          }`}
         >
           {loading ? (
             <span className="loading loading-dots loading-sm"></span>
