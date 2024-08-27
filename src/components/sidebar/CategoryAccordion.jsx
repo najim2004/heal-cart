@@ -1,26 +1,34 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 const CategoryAccordion = ({ categories }) => {
   const [openCategoryId, setOpenCategoryId] = useState(null);
 
-  const handleCategoryClick = (id) => {
-    setOpenCategoryId(openCategoryId === id ? null : id);
+  const handleCategoryClick = (category) => {
+    if (category.subcategories.length <= 0) console.log(category.name);
+    if (category?.id)
+      setOpenCategoryId(openCategoryId === category?.id ? null : category?.id);
   };
 
   return (
-    <div className="space-y-1 text-xl font-medium">
+    <div className="space-y-1 text-lg font-medium">
       {categories.map((category) => (
         <div key={category.id} className="">
           <button
-            onClick={() => handleCategoryClick(category.id)}
+            onClick={() => handleCategoryClick(category)}
             className="flex items-center justify-between w-full px-4 py-1"
           >
-            <span className="">{category.name}</span>
+            <span className="flex items-center gap-4">
+              <Image src={category?.image} alt="" width={30} height={40} />
+              {category.name}
+            </span>
+            <MdOutlineKeyboardArrowRight />
           </button>
           {openCategoryId === category.id && (
             <div className="px-4">
-              {category.subcategories.length > 0 ? (
-                <ul className="space-y-1 text-lg">
+              {category.subcategories.length > 0 && (
+                <ul className="space-y-1 text-base">
                   {category.subcategories.map((sub) => (
                     <li
                       key={sub.id}
@@ -30,8 +38,6 @@ const CategoryAccordion = ({ categories }) => {
                     </li>
                   ))}
                 </ul>
-              ) : (
-                <p className="">No subcategories available</p>
               )}
             </div>
           )}
