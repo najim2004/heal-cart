@@ -2,7 +2,7 @@
 import Container from "@/components/ui/Container";
 import HeroSection from "./home/herosection/HeroSection";
 import HowToOrder from "./home/howtoorder/HowToOrder";
-import ProductSlider from "@/components/productslider/Productslider";
+import ProductSlider from "@/components/productslider/ProductSlider";
 import Categories from "./home/categories/Categories";
 
 const Home = () => {
