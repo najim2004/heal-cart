@@ -11,7 +11,13 @@ const Home = () => {
       <HeroSection />
       <Categories />
       <HowToOrder />
-      <ProductSlider />
+      <ProductSlider title={"OTC Medicine"} />
+      <ProductSlider title={"Women's Choice"} />
+      <ProductSlider title={"Sexual Wellness"} />
+      <ProductSlider title={"Diabetic Care"} />
+      <ProductSlider title={"Baby Care"} />
+      <ProductSlider title={"Dental Care"} />
+      <ProductSlider title={"Supplement"} />
     </Container>
   );
 };

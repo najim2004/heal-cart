@@ -23,7 +23,7 @@ const Navbar = () => {
   const authenticated = session.status === "authenticated";
   const avatar = null;
   return (
-    <div className="bg-white sticky top-0 left-0 h-[100px] border-b-[5px] border-primary">
+    <div className="bg-white sticky top-0 left-0 h-[100px] border-b-[5px] border-primary z-50">
       <div className="max-w-[1200px] mx-auto flex  items-center h-full relative">
         <div className="flex gap-5 items-center">
           <label className="swap swap-rotate size-10 bg-primary text-white rounded-lg p-2">

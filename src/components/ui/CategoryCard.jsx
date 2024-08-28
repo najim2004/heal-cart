@@ -7,7 +7,13 @@ const CategoryCard = ({ img, categoryName, to = "#" }) => {
         className="flex flex-col gap-1 text-sm font-semibold justify-center items-center  py-5 border rounded-3xl"
         href={to}
       >
-        <Image width={50} height={50} src={img || "/"} alt="" />
+        <Image
+          width={50}
+          height={50}
+          src={img || "/"}
+          alt=""
+          className="size-[50px]"
+        />
         <p>{categoryName}</p>
       </Link>
     </>

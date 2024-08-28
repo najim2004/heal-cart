@@ -20,7 +20,13 @@ const CategoryAccordion = ({ categories }) => {
             className="flex items-center justify-between w-full px-4 py-1"
           >
             <span className="flex items-center gap-4">
-              <Image src={category?.image} alt="" width={30} height={40} />
+              <Image
+                src={category?.image}
+                alt=""
+                width={30}
+                height={30}
+                className="size-[30]"
+              />
               {category.name}
             </span>
             <MdOutlineKeyboardArrowRight />
