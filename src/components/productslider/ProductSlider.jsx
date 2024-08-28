@@ -1,4 +1,3 @@
-import ProductCard from "../ui/ProductCard";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -6,6 +5,7 @@ import "swiper/css/free-mode";
 
 import { FreeMode, Navigation } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+import ProductCard from "../ui/ProductCard";
 
 const ProductSlider = ({ title, products, to = "#" }) => {
   return (

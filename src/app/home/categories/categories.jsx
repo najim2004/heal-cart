@@ -1,4 +1,4 @@
-import CategoryCard from "@/components/ui/categoryCard";
+import CategoryCard from "@/components/ui/CategoryCard";
 
 const categoriesData = [
   {
@@ -85,7 +85,7 @@ const categoriesData = [
     order: 1,
   },
 ];
-const categories = () => {
+const Categories = () => {
   return (
     <div className="mt-10">
       <h3 className="text-xl font-semibold mb-5">Product Categories</h3>
@@ -102,4 +102,4 @@ const categories = () => {
   );
 };
 
-export default categories;
+export default Categories;
