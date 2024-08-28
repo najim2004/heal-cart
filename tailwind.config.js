@@ -12,7 +12,7 @@ module.exports = {
         secondary: "#E72929",
       },
       fontFamily: {
-        sans: ["Mulish", "sans-serif"], // Add this line
+        sans: ["Poppins", "sans-serif"], // Add this line
       },
     },
   },
