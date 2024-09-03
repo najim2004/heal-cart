@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 const CategoryAccordion = ({ categories }) => {
   const [openCategoryId, setOpenCategoryId] = useState(null);
-
+  const router = useRouter();
   const handleCategoryClick = (category) => {
     if (category?.subcategories?.length <= 0 || !categories?.subcategories)
-      console.log(category?.name);
+      router.push(`/category/${category?.slug}`);
     if (category?.id)
       setOpenCategoryId(openCategoryId === category?.id ? null : category?.id);
   };

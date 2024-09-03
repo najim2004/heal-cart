@@ -23,7 +23,7 @@ const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const { data: response } = await axiosPublic.post("/api", data);
+      const { data: response } = await axiosPublic.post("/api/signup", data);
       if (response?.res?.insertedId) {
         reset();
         setIsOpenSignUp(false);

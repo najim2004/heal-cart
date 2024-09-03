@@ -12,6 +12,7 @@ import { FaRegUser } from "react-icons/fa6";
 import AvatarMenu from "../ui/AvatarMenu";
 import { useDispatch } from "react-redux";
 import { toggleSidebar } from "@/lib/store/slices/sidebarSlice";
+import Link from "next/link";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
@@ -52,10 +53,13 @@ const Navbar = () => {
               <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
             </svg>
           </label>
-          <h2 className="flex items-center gap-2 text-secondary text-5xl font-bold">
+          <Link
+            href={"/"}
+            className="flex items-center gap-2 text-secondary text-5xl font-bold"
+          >
             <GiMedicines className="text-primary" />
             HealCart
-          </h2>
+          </Link>
         </div>
         <div className="flex flex-1 justify-center">
           <div className="h-12 border-2 border-primary rounded-lg flex">
