@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const ProductCard = ({ product }) => {
+  const router = useRouter();
   const {
     medicine_name,
     category_name,
@@ -14,7 +17,6 @@ const ProductCard = ({ product }) => {
     discount_value,
     discount = [],
   } = product;
-  console.log(parseFloat(discount?.value ? discount?.value : discount_value));
   const price = unit_prices?.length > 0 ? parseFloat(unit_prices[0]?.price) : 0;
   const discountPrice =
     discount?.value || discount_value
@@ -22,8 +24,18 @@ const ProductCard = ({ product }) => {
         (parseFloat(discount?.value ? discount?.value : discount_value) / 100)
       : price;
   const discountedPrice = (price - discountPrice).toFixed(2);
+  const handleClick = () => {
+    router.push(`/medicine/${product._id}`);
+  };
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    console.log("add to cart");
+  };
   return (
-    <div className="h-[335px] max-w-[224px] mx-auto bg-gray-50 p-2 rounded-lg flex flex-col">
+    <div
+      onClick={handleClick}
+      className="cursor-pointer h-[335px] max-w-[224px] mx-auto bg-gray-50 p-2 rounded-lg flex flex-col"
+    >
       <div className="w-full h-[150px] bg-primary/10 rounded-md overflow-hidden">
         <Image
           src={`https://api.medeasy.health${medicine_image}`}
@@ -45,7 +57,10 @@ const ProductCard = ({ product }) => {
             <span className="text-sm line-through">ট {price}</span>
           </div>
           {is_available ? (
-            <button className="px-1 font-semibold rounded-lg text-primary h-8 bg-primary/5 border-primary border text-xs">
+            <button
+              onClick={handleAddToCart}
+              className="active:scale-95 duration-500 px-1 font-semibold rounded-lg text-primary h-8 bg-primary/5 border-primary border text-xs"
+            >
               Add to Cart
             </button>
           ) : (
