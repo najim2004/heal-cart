@@ -1,8 +1,6 @@
 "use client";
 import { GiMedicines } from "react-icons/gi";
-import { CgMenuLeft } from "react-icons/cg";
 import { IoIosSearch } from "react-icons/io";
-import { LiaShoppingCartSolid } from "react-icons/lia";
 import SignUpForm from "../ui/SignUpForm";
 import { useState } from "react";
 import LoginForm from "../ui/LoginForm";
@@ -11,15 +9,16 @@ import Image from "next/image";
 import { FaRegUser } from "react-icons/fa6";
 import AvatarMenu from "../ui/AvatarMenu";
 import { useDispatch } from "react-redux";
-import { toggleSidebar } from "@/lib/store/slices/sidebarSlice";
+import { toggleSidebar } from "@/lib/frontend/store/slices/sidebarSlice";
 import Link from "next/link";
+import CartButton from "../cart/CartButton";
+import Container from "../ui/Container";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [isOpenAvatarMenu, setIsOpenAvatarMenu] = useState(false);
   const session = useSession();
-  console.log(session);
   const loading = session?.status === "loading";
   const authenticated = session.status === "authenticated";
   const avatar = null;
@@ -74,28 +73,26 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <div className="flex items-center gap-10">
-          <button className="group size-12 bg-primary text-white/90 text-3xl flex items-center justify-center rounded-full relative">
-            <span className="size-5 rounded-full flex justify-center items-center absolute -top-[2px] -right-[2px] bg-secondary text-xs">
-              4
-            </span>
-            <LiaShoppingCartSolid className="group-active:scale-95" />
-          </button>
+        <div className="flex items-center justify-end gap-10">
           {loading ? (
             <span className="size-12 loading loading-ring loading-lg"></span>
           ) : authenticated ? (
-            <div>
-              <button
-                onClick={() => setIsOpenAvatarMenu(!isOpenAvatarMenu)}
-                className="size-12 rounded-full border border-primary text-3xl flex justify-center items-center p-1 active:scale-95 duration-500"
-              >
-                {avatar ? (
-                  <Image src={avatar} alt="profile" width={48} height={48} />
-                ) : (
-                  <FaRegUser />
-                )}
-              </button>
-            </div>
+            <>
+              <div>
+                <button
+                  onClick={() => setIsOpenAvatarMenu(!isOpenAvatarMenu)}
+                  className="size-12 rounded-full border border-primary text-3xl flex justify-center items-center p-1 active:scale-95 duration-500"
+                >
+                  {avatar ? (
+                    <Image src={avatar} alt="profile" width={48} height={48} />
+                  ) : (
+                    <FaRegUser />
+                  )}
+                </button>
+              </div>
+              {/* cart button */}
+              <CartButton />
+            </>
           ) : (
             <div className="h-12 px-6 bg-primary text-white text-lg font-semibold flex gap-1 items-center justify-center rounded-lg">
               <button
@@ -120,24 +117,34 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        <div className={`absolute top-[101px] right-0`}>
-          <div className={`${isOpenAvatarMenu ? "flex" : "hidden"}`}>
-            <AvatarMenu />
-          </div>
-          <div className={`${isOpenLogin ? "flex" : "hidden"}`}>
-            <LoginForm
-              isOpenLogin={isOpenLogin}
-              setIsOpenLogin={setIsOpenLogin}
-              setIsOpenSignUp={setIsOpenSignUp}
-            />
-          </div>
-          <div className={`${isOpenSignUp ? "flex" : "hidden"}`}>
-            <SignUpForm
-              isOpenSignUp={isOpenSignUp}
-              setIsOpenSignUp={setIsOpenSignUp}
-              setIsOpenLogin={setIsOpenLogin}
-            />
-          </div>
+        <div
+          className={`${
+            isOpenLogin || isOpenAvatarMenu || isOpenSignUp
+              ? "fixed bg-black/15 w-full h-[calc(100vh-100px)] top-[100px] right-0"
+              : ""
+          }`}
+        >
+          <Container className={"relative"}>
+            <div className={`absolute top-2 right-0`}>
+              <div className={`${isOpenAvatarMenu ? "flex" : "hidden"}`}>
+                <AvatarMenu />
+              </div>
+              <div className={`${isOpenLogin ? "flex" : "hidden"}`}>
+                <LoginForm
+                  isOpenLogin={isOpenLogin}
+                  setIsOpenLogin={setIsOpenLogin}
+                  setIsOpenSignUp={setIsOpenSignUp}
+                />
+              </div>
+              <div className={`${isOpenSignUp ? "flex" : "hidden"}`}>
+                <SignUpForm
+                  isOpenSignUp={isOpenSignUp}
+                  setIsOpenSignUp={setIsOpenSignUp}
+                  setIsOpenLogin={setIsOpenLogin}
+                />
+              </div>
+            </div>
+          </Container>
         </div>
       </div>
     </div>

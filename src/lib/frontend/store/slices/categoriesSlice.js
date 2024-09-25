@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const categoriesSlice = createSlice({
-  name: "sidebar",
+  name: "categories",
   initialState,
   reducers: {
     setCategories: (state, action) => {

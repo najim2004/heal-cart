@@ -1,11 +1,20 @@
 "use client";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   const router = useRouter();
+  const { data } = useSession();
+  const axiosSecure = useAxiosPublic();
+  const queryClient = useQueryClient();
+
   const {
+    _id,
     medicine_name,
     category_name,
     manufacturer_name,
@@ -22,32 +31,71 @@ const ProductCard = ({ product }) => {
     discount?.value || discount_value
       ? price *
         (parseFloat(discount?.value ? discount?.value : discount_value) / 100)
-      : price;
+      : 0;
   const discountedPrice = (price - discountPrice).toFixed(2);
-  const handleClick = () => {
-    router.push(`/medicine/${product._id}`);
-  };
+
+  /*
+userId:"66e7114d070d34787932b79b"
+items:[
+  {
+  quantity:3,
+  unit:'pieces',
+  price:999.99
+  generic_name:"Latest model with A15 Bionic chip",
+  medicine_image:"https://example.com/images/iphone14.jpg",
+  medicine_name:"Apple iPhone 14",
+  product_id:"66e7114d070d34787932b79c"
+  }
+]
+*/
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (productId) => {
+      const product = {
+        quantity: 1,
+        unit: unit_prices[0]?.unit || null,
+        price: discountedPrice,
+        generic_name,
+        medicine_image,
+        medicine_name,
+        product_id: productId,
+      };
+      try {
+        const response = await axiosSecure.post(`api/cart/${data?.user?.id}`, {
+          product,
+        });
+        return response.data;
+      } catch (error) {
+        console.error("Error adding item:", error);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cart", data?.user?.id, axiosSecure]);
+      toast.success("successfully added to the cart!");
+    },
+  });
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    console.log("add to cart");
+    if (data?.user?.id) mutateAsync(_id);
+    else toast.error("Please login first!");
   };
   return (
     <div
-      onClick={handleClick}
-      className="cursor-pointer h-[335px] max-w-[224px] mx-auto bg-gray-50 p-2 rounded-lg flex flex-col"
+      onClick={() => router.push(`/medicine/${product._id}`)}
+      className="cursor-pointer h-[300px] max-w-[224px] mx-auto bg-gray-50 p-2 rounded-lg flex flex-col"
     >
-      <div className="w-full h-[150px] bg-primary/10 rounded-md overflow-hidden">
+      <div className="w-full max-h-[150px] bg-primary/10 rounded-md overflow-hidden">
         <Image
           src={`https://api.medeasy.health${medicine_image}`}
           alt=""
           width={500}
           height={150}
-          className="size-full"
+          className="w-full h-full"
         />
       </div>
       <div className="mt-2 flex flex-col flex-grow">
         <div className="flex-grow">
-          <h3 className="font-semibold">{medicine_name}</h3>
+          <h3 className="font-semibold line-clamp-2">{medicine_name}</h3>
           <p className="mt-2 mb-1 text-sm text-primary">{generic_name}</p>
           <p className="text-sm text-gray-500">{manufacturer_name}</p>
         </div>

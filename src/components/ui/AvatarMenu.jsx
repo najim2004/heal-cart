@@ -3,53 +3,75 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaRegUser } from "react-icons/fa6";
-import { TbLogout2 } from "react-icons/tb";
+import { TbHelpSquareRounded } from "react-icons/tb";
+import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
+import { MdLanguage } from "react-icons/md";
+
 const AvatarMenu = () => {
   const avatar = null;
   const menuList = (
     <>
       <li>
-        <Link href={"/bookmarks"}>Bookmarks</Link>
+        <Link
+          href={"/profile"}
+          className="flex items-center gap-2 hover:font-medium"
+        >
+          <IoSettingsOutline /> Profile setting
+        </Link>
       </li>
       <li>
-        <Link href={"/bookmarks"}>Bookmarks</Link>
+        <Link
+          href={"/help"}
+          className="flex items-center gap-2 hover:font-medium"
+        >
+          <TbHelpSquareRounded /> Help
+        </Link>
       </li>
       <li>
-        <Link href={"/bookmarks"}>Bookmarks</Link>
-      </li>
-      <li>
-        <Link href={"/bookmarks"}>Bookmarks</Link>
+        <Link
+          href={"/language"}
+          className="flex items-center gap-2 hover:font-medium"
+        >
+          <MdLanguage />
+          Language
+        </Link>
       </li>
     </>
   );
   return (
-    <div className="w-[380px] overflow-x-hidden mx-auto p-8 bg-white rounded-lg shadow-md flex flex-col justify-center border border-primary/20">
-      <div className="size-[80px] rounded-full flex justify-center items-center text-4xl border border-primary mx-auto">
-        {avatar ? (
-          <Image
-            src={avatar}
-            alt="profile"
-            width={80}
-            height={80}
-            className="rounded-full"
-          />
-        ) : (
-          <FaRegUser />
-        )}
+    <div className="max-w-[300px] min-w-[260px] overflow-x-hidden mx-auto p-6 bg-white rounded-2xl flex flex-col justify-center border">
+      <div className="flex items-center gap-3">
+        <div className="size-[40px] rounded-full flex justify-center items-center text-2xl border border-primary overflow-hidden">
+          {avatar ? (
+            <Image
+              src={avatar}
+              alt="profile"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+          ) : (
+            <FaRegUser />
+          )}
+        </div>
+        <div className="">
+          <h3 className="text-sm font-semibold text-gray-800">
+            Mohammad Najim
+          </h3>
+          <p className="text-xs font-normal text-gray-600">najim@gamil.com</p>
+        </div>
       </div>
-      <h3 className="text-2xl text-center mt-1 font-bold text-black">Najim</h3>
-      <button className="text-white bg-primary h-12 px-3 rounded-lg text-xl font-bold active:scale-95 duration-500 mx-auto mt-2">
+      {/* <button className="text-white bg-primary h-12 px-3 rounded-lg text-xl font-bold active:scale-95 duration-500 mx-auto mt-2">
         View Profile
-      </button>
+      </button> */}
 
-      <ul className="text-black text-lg font-bold mt-6 *:pb-3 *:border-b *:border-primary/20">
-        {menuList}
-      </ul>
+      <ul className="space-y-3 mt-6 text-gray-800">{menuList}</ul>
       <button
         onClick={() => signOut()}
-        className="mt-2 h-10 bg-primary text-white font-bold text-xl rounded-md flex justify-center items-center gap-2 active:scale-95 duration-500"
+        className="flex items-center gap-2 mt-3 hover:font-medium text-gray-800"
       >
-        Logout <TbLogout2 />
+        <IoLogOutOutline />
+        Logout
       </button>
     </div>
   );

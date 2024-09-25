@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/connectDB";
+import { connectDB } from "@/lib/backend/connectDB";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {

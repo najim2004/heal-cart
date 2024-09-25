@@ -2,26 +2,15 @@
 import favoriteIcon from "../../assets/add-favorite-marked-svgrepo-com.svg";
 import Image from "next/image";
 import CategoryAccordion from "./CategoryAccordion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { setCategories } from "@/lib/store/slices/categoriesSlice";
+
 const Sidebar = () => {
   const axiosPublic = useAxiosPublic();
   const toggleSidebar = useSelector((state) => state?.sidebar?.isOpen);
   const categoriesData = useSelector((state) => state?.categories?.categories);
-  const dispatch = useDispatch();
-  const { data } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await axiosPublic.get("api/categories");
-      return response.data;
-    },
-  });
-  useEffect(() => {
-    if (data?.success) dispatch(setCategories(data?.categories));
-  }, [dispatch, data]);
+  const userinfo = useSelector((state) => state?.user?.userData);
+  console.log(userinfo);
   return (
     <div
       className={`${

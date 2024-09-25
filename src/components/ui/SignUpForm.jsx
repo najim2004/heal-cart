@@ -24,15 +24,16 @@ const SignUpForm = ({ isOpenSignUp, setIsOpenSignUp, setIsOpenLogin }) => {
     setLoading(true);
     try {
       const { data: response } = await axiosPublic.post("/api/signup", data);
+
       if (response?.res?.insertedId) {
         reset();
         setIsOpenSignUp(false);
-        toast.success("Successfully Registered!");
-      }
+        toast.success(response.message);
+      } else toast.error(response.message);
+
       setLoading(false);
     } catch (err) {
-      toast.error("Failed to register. Please try again.");
-      console.log(err);
+      toast.error(err.message);
       setLoading(false);
     }
   };

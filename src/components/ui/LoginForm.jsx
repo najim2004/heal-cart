@@ -27,15 +27,13 @@ const LoginForm = ({ isOpenLogin, setIsOpenLogin, setIsOpenSignUp }) => {
         ...data,
         redirect: false,
       });
-      console.log(res);
       if (res.ok) {
         setIsOpenLogin(false);
         setIsOpenSignUp(false);
         toast.success("Login successful!");
       }
-      if (res.error === "CredentialsSignin" || !res.ok) {
-        toast.error("Invalid credentials. Please try again.");
-      }
+      if (res.error) toast.error(res.error);
+
       setLoading(false);
     } catch (error) {
       toast.error("Failed to login. Please try again.");

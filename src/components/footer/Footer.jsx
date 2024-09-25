@@ -31,7 +31,7 @@ const Footer = () => {
     </>
   );
   return (
-    <div className="mt-10 min-h-[400px] bg-black py-10">
+    <div className="min-h-[400px] bg-black py-10">
       <Container>
         <div className="flex justify-between">
           <div className="text-white">
