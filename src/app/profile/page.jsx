@@ -86,12 +86,14 @@ import React from "react";
 }
 */
 
-const Profile = () => {
+const Profile = ({ children }) => {
   return (
     <div className="w-full min-h-[calc(100vh-100px)] bg-gray-100 p-8">
       <Container className="flex gap-8">
         <LeftSide />
-        <div className="flex-grow bg-white min-h-[400px] rounded-2xl"></div>
+        <div className="flex-grow bg-white min-h-[400px] rounded-2xl">
+          {children}
+        </div>
       </Container>
     </div>
   );

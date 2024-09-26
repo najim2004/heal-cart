@@ -13,7 +13,7 @@ const AvatarMenu = () => {
     <>
       <li>
         <Link
-          href={"/profile"}
+          href={"/profile/personal-info"}
           className="flex items-center gap-2 hover:font-medium"
         >
           <IoSettingsOutline /> Profile setting

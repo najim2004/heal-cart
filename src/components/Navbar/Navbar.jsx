@@ -13,6 +13,8 @@ import { toggleSidebar } from "@/lib/frontend/store/slices/sidebarSlice";
 import Link from "next/link";
 import CartButton from "../cart/CartButton";
 import Container from "../ui/Container";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
@@ -22,6 +24,13 @@ const Navbar = () => {
   const loading = session?.status === "loading";
   const authenticated = session.status === "authenticated";
   const avatar = null;
+  const pathname = usePathname();
+  useEffect(() => {
+    setIsOpenAvatarMenu(false);
+    setIsOpenLogin(false);
+    setIsOpenSignUp(false);
+  }, [pathname]);
+  console.log(pathname);
   return (
     <div className="bg-white sticky top-0 left-0 h-[100px] border-b-[5px] border-primary z-50">
       <div className="max-w-[1200px] mx-auto flex  items-center h-full relative">
@@ -76,7 +85,7 @@ const Navbar = () => {
         <div className="flex items-center justify-end gap-10">
           {loading ? (
             <span className="size-12 loading loading-ring loading-lg"></span>
-          ) : authenticated ? (
+          ) : !authenticated ? (
             <>
               <div>
                 <button

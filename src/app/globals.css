@@ -5,3 +5,7 @@
 body {
   @apply font-sans;
 }
+
+.profile a.active {
+  @apply text-primary;
+}
