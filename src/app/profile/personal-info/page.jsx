@@ -3,22 +3,30 @@ import React from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { LuImage } from "react-icons/lu";
-import PersonalInfoAndForm from "@/components/personal-info/PersonalInfoAndForm";
+import PersonalInfoAndForm from "@/components/profile/personal-info/PersonalInfoAndForm";
+import { FaRegUser } from "react-icons/fa6";
 const PersonalInfo = () => {
+  const avatar = null;
   return (
     <div className="px-2">
-      <h1 className="text-lg font-semibold flex items-center gap-3 mb-5">
+      <h1 className="text-lg font-semibold flex items-center gap-3 mb-5 text-primary">
         <FaRegUserCircle className="" />
         Personal info
       </h1>
       <div className="flex items-center gap-4">
-        <Image
-          src=""
-          alt=""
-          height={100}
-          width={100}
-          className="rounded-full object-cover bg-gray-300"
-        />
+        <div className="size-[100px] rounded-full overflow-hidden flex items-center justify-center border border-primary">
+          {avatar ? (
+            <Image
+              src={avatar}
+              alt=""
+              height={100}
+              width={100}
+              className="rounded-full object-cover"
+            />
+          ) : (
+            <FaRegUser className="text-6xl text-primary" />
+          )}
+        </div>
         <div className="flex flex-col justify-between gap-2">
           <label
             htmlFor="change-avatar"

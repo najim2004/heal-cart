@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
   const { id: userId } = params;
-  console.log(6, userId);
 
   try {
     const user = await getUser(userId);

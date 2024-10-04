@@ -85,7 +85,7 @@ const Navbar = () => {
         <div className="flex items-center justify-end gap-10">
           {loading ? (
             <span className="size-12 loading loading-ring loading-lg"></span>
-          ) : !authenticated ? (
+          ) : authenticated ? (
             <>
               <div>
                 <button

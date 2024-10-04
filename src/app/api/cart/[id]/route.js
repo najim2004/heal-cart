@@ -1,4 +1,4 @@
-import { createCart } from "@/lib/backend/cart/createCart";
+import { postCart } from "@/lib/backend/cart/postCart";
 import { NextResponse } from "next/server";
 import { getCartByUserId } from "@/lib/backend/cart/getCart";
 import { updateCartQuantity } from "@/lib/backend/cart/updateCartQuantity";
@@ -40,9 +40,8 @@ export const GET = async (req, { params }) => {
 export const POST = async (req, { params }) => {
   const { id: userId } = params;
   const { product } = await req.json();
-
   try {
-    const result = await createCart(userId, product);
+    const result = await postCart(userId, product);
 
     return NextResponse.json(result, {
       status: result.success

@@ -14,7 +14,7 @@ const AvatarMenu = () => {
       <li>
         <Link
           href={"/profile/personal-info"}
-          className="flex items-center gap-2 hover:font-medium"
+          className="flex items-center gap-2 hover:text-primary"
         >
           <IoSettingsOutline /> Profile setting
         </Link>
@@ -22,7 +22,7 @@ const AvatarMenu = () => {
       <li>
         <Link
           href={"/help"}
-          className="flex items-center gap-2 hover:font-medium"
+          className="flex items-center gap-2 hover:text-primary"
         >
           <TbHelpSquareRounded /> Help
         </Link>
@@ -30,7 +30,7 @@ const AvatarMenu = () => {
       <li>
         <Link
           href={"/language"}
-          className="flex items-center gap-2 hover:font-medium"
+          className="flex items-center gap-2 hover:text-primary"
         >
           <MdLanguage />
           Language
@@ -68,7 +68,7 @@ const AvatarMenu = () => {
       <ul className="space-y-3 mt-6 text-gray-800">{menuList}</ul>
       <button
         onClick={() => signOut()}
-        className="flex items-center gap-2 mt-3 hover:font-medium text-gray-800"
+        className="flex items-center gap-2 mt-3 hover:text-primary text-gray-800"
       >
         <IoLogOutOutline />
         Logout

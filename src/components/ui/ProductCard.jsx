@@ -50,15 +50,12 @@ items:[
 */
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (productId) => {
+    mutationFn: async (product_id) => {
       const product = {
         quantity: 1,
-        unit: unit_prices[0]?.unit || null,
-        price: discountedPrice,
-        generic_name,
-        medicine_image,
-        medicine_name,
-        product_id: productId,
+        unit_type: unit_prices[0]?.unit || null,
+        price_per_unit: discountedPrice,
+        product_id,
       };
       try {
         const response = await axiosSecure.post(`api/cart/${data?.user?.id}`, {
@@ -67,6 +64,7 @@ items:[
         return response.data;
       } catch (error) {
         console.error("Error adding item:", error);
+        toast.error("Error adding item:", error);
       }
     },
     onSuccess: () => {
